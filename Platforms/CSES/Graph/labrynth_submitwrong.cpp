@@ -2,29 +2,28 @@
 #define MOD 1000000007
 typedef long long LL;
 using namespace std;
-
+ 
 int N = 0;
 int M = 0;
 bool found = false;
-
+ 
 deque<pair<int, int>> positions;
-
+ 
 void DFS(vector<vector<char>> &maze, int i, int j)
 {
     if (found)
     {
         return;
     }
-
+ 
     maze[i][j] = '#';
-    //North
     if (i != 0)
     {
         if (maze[i - 1][j] == '.')
         {
             DFS(maze, i - 1, j);
         }
-        if (maze[i - 1][j] == 'B' && found==false)
+        if (maze[i - 1][j] == 'B')
         {
             found = true;
             positions.push_front(make_pair(i - 1, j));
@@ -37,7 +36,7 @@ void DFS(vector<vector<char>> &maze, int i, int j)
         {
             DFS(maze, i, j + 1);
         }
-        if (maze[i][j + 1] == 'B' && found==false)
+        if (maze[i][j + 1] == 'B')
         {
             found = true;
             positions.push_front(make_pair(i, j + 1));
@@ -50,7 +49,7 @@ void DFS(vector<vector<char>> &maze, int i, int j)
         {
             DFS(maze, i + 1, j);
         }
-        if (maze[i + 1][j] == 'B' && found==false)
+        if (maze[i + 1][j] == 'B')
         {
             found = true;
             positions.push_front(make_pair(i + 1, j));
@@ -63,7 +62,7 @@ void DFS(vector<vector<char>> &maze, int i, int j)
         {
             DFS(maze, i, j - 1);
         }
-        if (maze[i][j - 1] == 'B' && found==false)
+        if (maze[i][j - 1] == 'B')
         {
             found = true;
             positions.push_front(make_pair(i, j - 1));
@@ -74,13 +73,13 @@ void DFS(vector<vector<char>> &maze, int i, int j)
         positions.push_front(make_pair(i, j));
     }
 }
-
+ 
 void findPath(vector<vector<char>> &maze, int Ai, int Aj)
 {
     maze[Ai][Aj] = '.';
     DFS(maze, Ai, Aj);
 }
-
+ 
 int main()
 {
     ios::sync_with_stdio(false);
@@ -107,11 +106,11 @@ int main()
             }
         }
     }
-
+ 
     findPath(maze, Ai, Aj);
-
+ 
     // cout<<"Done";
-
+ 
     /*
     char x[N][M];
     for(int i=0;i<N;i++)
@@ -121,12 +120,12 @@ int main()
             x[i][j] = '.';
         }
     }
-
+ 
     for(pair<int,int> ele:positions)
     {
         x[ele.first][ele.second] = '#';
     }
-
+ 
     cout<<"\n\n\n\n";
     for(int i=0;i<N;i++)
     {
@@ -137,12 +136,12 @@ int main()
         cout<<"\n";
     }
     */
-
+ 
     if (found)
     {
         cout<<"YES\n";
         cout<<positions.size()-1<<"\n";
-
+ 
         for (int i = 0; i < positions.size()-1; i++)
         {
             if (positions[i].first == positions[i + 1].first)
